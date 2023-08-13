@@ -75,17 +75,13 @@ URL: http://localhost:5000/
 Click "Send"
 
 ## Design and Architecture Decisions
-_Database_
-SQLite: A lightweight database used for simplicity and ease of setup. It's suitable for small to medium-sized applications.
-Trade-offs: While convenient, SQLite may not be suitable for very large datasets or high-concurrency workloads.
-_Web Framework_
-Flask: A minimal and flexible web framework used to build the web interface and API.
-Rationale: Flask allows rapid development and easy integration with the existing codebase without unnecessary complexity.
-_Data Model_
-Flexible Schema: The schema is designed to handle various event types without modification.
-Rationale: This approach supports an open-ended list of event types, making the system more extensible.
-_Security_
-Note: Authentication was mentioned but not implemented in the code snippets. In a production environment, proper authentication and authorization should be implemented.
+- **Database:** SQLite, a lightweight database used for simplicity and ease of setup. It's suitable for small to medium-sized applications.
+- Trade-offs: While convenient, SQLite may not be suitable for very large datasets or high-concurrency workloads.
+- **Web Framework:** Flask, a minimal and flexible web framework used to build the web interface and API.
+- Rationale: Flask allows rapid development and easy integration with the existing codebase without unnecessary complexity.
+- **Data Model:** Flexible Schema, the schema is designed to handle various event types without modification.
+- Rationale: This approach supports an open-ended list of event types, making the system more extensible.
+- **Security:** A basic authentication token is used to validate whether the API service can be used or not, depending on if the user is aware of the API token.
 
 ## Conclusion
 This document provides a comprehensive guide to deploying, testing, and understanding the audit log service. The system is designed with flexibility and simplicity in mind, but there are areas for further improvement and scaling as mentioned in the additional notes.
