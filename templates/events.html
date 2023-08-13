@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Audit Log Events</title>
+</head>
+<body>
+    <h1>Audit Log Events</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Timestamp</th>
+            <th>Event Type</th>
+            <th>User ID</th>
+            <th>Variant Data</th>
+        </tr>
+        {% for event in events %}
+        <tr>
+            <td>{{ event.id }}</td>
+            <td>{{ event.timestamp }}</td>
+            <td>{{ event.event_type }}</td>
+            <td>{{ event.user_id }}</td>
+            <td>{{ event.variant_data }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

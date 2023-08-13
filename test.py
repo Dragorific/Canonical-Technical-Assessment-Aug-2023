@@ -22,7 +22,7 @@ class AuditLogServiceTest(unittest.TestCase):
     def test_post_event(self):
         url = 'http://localhost:8000/event'
         headers = {'Authorization': 'secret_token', 'Content-Type': 'application/json'}
-        data = {"event_type": "account_created", "user_id": "123", "variant_data": {}}
+        data = {"event_type": "account_deleted", "user_id": "411", "variant_data": {"response": "This test shows that an account was deleted."}}
         response = requests.post(url, json=data, headers=headers)
         self.assertEqual(response.status_code, 201)
 
