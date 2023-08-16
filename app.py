@@ -9,5 +9,5 @@ def index():
     events = query_events({})
     return render_template('events.html', events=events)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+def start_flask_app():
+    app.run()

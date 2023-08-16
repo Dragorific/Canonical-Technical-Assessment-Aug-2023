@@ -1,11 +1,13 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from jsonschema import validate, ValidationError
 from prometheus_client import start_http_server
+from multiprocessing import Process
 from Event import *
 from EventStorage import *
 from schemas import event_schema
 from metrics import *
 from database import *
+from app import start_flask_app
 
 AUTH_TOKEN = "secret_token"  # Simple authentication token
 
@@ -21,7 +23,7 @@ class AuditLogHandler(BaseHTTPRequestHandler):
                 self.process_GET()
             REQUESTS.labels(method=method, endpoint=endpoint).inc()
 
-    def process_POST(self):
+    def process_POST(self): 
         if self.headers.get("Authorization") != AUTH_TOKEN:
             self.send_error(401, "Unauthorized")
             return
@@ -79,10 +81,15 @@ def run_server():
     server_address = ('', 8000)
     httpd = HTTPServer(server_address, AuditLogHandler)
     print("Audit Log Service running on port 8000...")
+
+    # Start Flask app as a daemon
+    flask_process = Process(target=start_flask_app)
+    flask_process.daemon = True
+    flask_process.start()
     
     # Start the Prometheus metrics server
-    # start_http_server(8001)
-    # print("Metrics available at http://localhost:8001/metrics")
+    start_http_server(8001)
+    print("Metrics available at http://localhost:8001/metrics")
     
     httpd.serve_forever()
 
